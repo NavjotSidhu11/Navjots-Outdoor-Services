@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="Bussiness Logo.png">
 
-  <title>Your Lawn Care Business</title>
+  <title>NAVJOTS OUTDOOR SERVICES</title>
 
   <style>
 
@@ -109,9 +109,9 @@
 
       <h3>Yard Care Plan</h3>
 
-      <p>$250-400/month</p>
+      <p>$0.03 per square foot</p>
 
-      <p>2 cuts per month</p>
+      <p>1-2 cuts per month</p>
 
     </div>
 
@@ -119,7 +119,7 @@
 
       <h3>Power Washing</h3>
 
-      <p>$250-400</p>
+      <p>$0.04 per square foot</p>
 
       <p>1-2 per year</p>
 
@@ -129,7 +129,7 @@
 
       <h3>Roof/Gutter Cleaning</h3>
 
-      <p>$450-700</p>
+      <p>$0.04 per square foot</p>
 
       <p>1 time per year</p>
 
@@ -139,9 +139,9 @@
 
       <h3>Window Washing</h3>
 
-      <p>$50-200</p>
+      <p>$6 per window</p>
 
-      <p>1/2 per month</p>
+      <p>1 per month</p>
 
     </div>
 
@@ -178,186 +178,132 @@
 </section>
 
 <section id="before-after">
-
   <h2>Before & After</h2>
 
   <div class="ba-container">
-
     <div class="ba-image-wrapper">
 
-      <div class="ba-divider" id="divider"></div>
-
       <div class="ba-label ba-before-label">Before</div>
-
       <div class="ba-label ba-after-label">After</div>
 
-      <img src="https://via.placeholder.com/600x400?text=After" class="ba-after">
+      <!-- AFTER -->
+      <img
+        src="https://th.bing.com/th/id/R.b2ee4a9d83b0509c50b30e908c1644d3?rik=4vrnxLdAbLLSwg&pid=ImgRaw&r=0"
+        class="ba-after"
+      >
 
-      <img src="https://via.placeholder.com/600x400?text=Before" class="ba-before" id="beforeImg">
-
+      <!-- BEFORE -->
+      <img
+        src="https://tse4.mm.bing.net/th/id/OIP.9RCWljaOTZC4iznXIEgufwHaFj?r=0&cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3"
+        class="ba-before"
+        id="beforeImg"
+      >
     </div>
 
-    <input type="range" min="0" max="100" value="50" id="slider">
-
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value="50"
+      id="slider"
+    >
   </div>
-
 </section>
 
 <style>
+.ba-container {
+  max-width: 700px;
+  margin: auto;
+}
 
-.ba-container { max-width:600px; margin:auto; }
+.ba-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
 
-.ba-image-wrapper { position:relative; }
+.ba-image-wrapper img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
 
-.ba-image-wrapper img { width:100%; display:block; border-radius:10px; }
+/* AFTER image stays full */
+.ba-after {
+  position: relative;
+  z-index: 1;
+}
+
+/* BEFORE image fades */
+.ba-before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0.5;
+  transition: opacity 0.15s linear;
+}
 
 .ba-label {
-
-  position:absolute;
-
-  top:10px;
-
-  padding:5px 10px;
-
-  background:rgba(0,0,0,0.6);
-
-  color:white;
-
-  font-size:14px;
-
-  border-radius:5px;
-
+  position: absolute;
+  top: 10px;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border-radius: 6px;
+  font-size: 14px;
+  z-index: 3;
 }
 
-.ba-before-label { left:10px; }
-
-.ba-after-label { right:10px; }
-
-.ba-before { position:absolute; top:0; left:0; width:50%; overflow:hidden; }
-
-.ba-divider {
-
-  position:absolute;
-
-  top:0;
-
-  bottom:0;
-
-  width:3px;
-
-  background:white;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  box-shadow:0 0 5px rgba(0,0,0,0.5);
-
+.ba-before-label {
+  left: 10px;
 }
 
-#slider { width:100%; margin-top:10px; }
+.ba-after-label {
+  right: 10px;
+}
 
+#slider {
+  width: 100%;
+  margin-top: 15px;
+}
 </style>
 
 <script>
-
 const slider = document.getElementById('slider');
-
 const beforeImg = document.getElementById('beforeImg');
 
-const divider = document.getElementById('divider');
+slider.addEventListener('input', () => {
 
-let isDragging = false;
+  // Convert slider value to opacity
+  const opacity = slider.value / 100;
 
-function updateSlider(x, container) {
-
-  const rect = container.getBoundingClientRect();
-
-  let position = ((x - rect.left) / rect.width) * 100;
-
-  position = Math.max(0, Math.min(100, position));
-
-  beforeImg.style.width = position + '%';
-
-  divider.style.left = position + '%';
-
-  slider.value = position;
-
-}
-
-const container = document.querySelector('.ba-image-wrapper');
-
-container.addEventListener('mousedown', (e) => {
-
-  isDragging = true;
-
-  updateSlider(e.clientX, container);
+  // Fade BEFORE image
+  beforeImg.style.opacity = opacity;
 
 });
-
-window.addEventListener('mousemove', (e) => {
-
-  if (isDragging) {
-
-    updateSlider(e.clientX, container);
-
-  }
-
-});
-
-window.addEventListener('mouseup', () => {
-
-  isDragging = false;
-
-});
-
-// Touch support for mobile
-
-container.addEventListener('touchstart', (e) => {
-
-  isDragging = true;
-
-  updateSlider(e.touches[0].clientX, container);
-
-});
-
-window.addEventListener('touchmove', (e) => {
-
-  if (isDragging) {
-
-    updateSlider(e.touches[0].clientX, container);
-
-  }
-
-});
-
-window.addEventListener('touchend', () => {
-
-  isDragging = false;
-
-});
-
 </script>
 
 <section id="contact">
 
   <h2>Contact Us</h2>
 
-  <p>Phone: (123) 456-7890</p>
+  <p>Phone: (425) 362-9840</p>
 
-  <p>Email: your@email.com</p>
+  <p>Email: Navjotssidhu2011@gmail.com</p>
 
 </section>
 
 <footer>
 
-  <p>© 2026 Your Lawn Care Business</p>
+  <p>Growing and developing Company</p>
 
 </footer>
 
 <!-- Floating Text Message Button -->
 
-<a href="sms:1234567890" style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px 20px; border-radius:50px; text-decoration:none; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+<a href="sms:4253629840" style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px 20px; border-radius:50px; text-decoration:none; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
 
   Text Us
 
